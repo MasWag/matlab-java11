@@ -11,7 +11,7 @@ fi
 for MATLAB_HOME in /usr/local/R*; do
     printf "Try %s\n" "${MATLAB_HOME}"
     [ ! -f "$MATLAB_HOME/bin/matlab" ] && continue
-    mvn clean package > /dev/null 2>&1
+    MATLAB_HOME="${MATLAB_HOME}" mvn clean package > /dev/null 2>&1
     if java -Djava.library.path="${MATLAB_HOME}/bin/glnxa64"  -jar ./target/matlab-java11-1.0-SNAPSHOT-jar-with-dependencies.jar > /dev/null 2>&1; then
         printf "Java 11 works well with %s\n" "${MATLAB_HOME}"
     else
